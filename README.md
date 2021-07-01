@@ -36,7 +36,13 @@ $ yarn typeorm migration:run
 $ yarn dev
 ```
 
-### Regras
+<h1 name="preview">:bookmark_tabs: Documentação das rotas</h1>
+<h3>Documentação com Swagger UI</h3>
+<h5>Depois de executada a aplicação, acessar na url: http://localhost:3000/api-docs</h5>
+
+<img alt="swagger" title="docs-swagger" src=".github/api_valoriza_swagger.png" width="700px"/>
+
+## 📌 Regras
 
 - Cadastro de usuário
 
@@ -54,16 +60,17 @@ $ yarn dev
 
 - Cadastro de elogios
 
-- [ ] Não é permitido um usuário cadastrar um elogio para si
+- [x] Não é permitido um usuário cadastrar um elogio para si
 
-- [ ] Não é permitido cadastrar elogios para usuários inválidos
+- [x] Não é permitido cadastrar elogios para usuários inválidos
 
-- [ ] O usuário precisar estar autenticado na aplicação
+- [x] O usuário precisar estar autenticado na aplicação
    
-## Tecnologias 💻
+## 💻 Tecnologias 
 * [Node.js](https://nodejs.org/en/) - Baixe a versão recomendada LTS.
 * [Yarn](https://classic.yarnpkg.com/en/docs/install/#windows-stable) - Gerenciador de pacotes, similar ao npm do Node.js.
 * [Express](https://expressjs.com/pt-br/) - Framework para desenvolver back-end com Node.js.
 * [TypeScript](https://www.typescriptlang.org/) - É JavaScript com tipagem de dados e recursos adicionais, voltado ao lado servidor.
 * [Beekeeper](https://www.beekeeperstudio.io/) - Gerenciador de Banco de Dados e editor de código SQL.
 * [Insomnia](https://insomnia.rest/) - É um programa que testa as requisições de uma API(GET, POST, PUT, DELETE, PATCH, etc).
+* [Swagger](https://swagger.io/) - É uma linguagem de descrição de interface para descrever APIs RESTful expressas usando JSON.
