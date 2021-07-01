@@ -25,7 +25,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserSend"
               },
               "examples": {
                 "user": {
@@ -50,7 +50,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/User"
+                  "$ref": "#/components/schemas/UserResponse"
                 }
               }
             }
@@ -73,7 +73,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/User"
+                    "$ref": "#/components/schemas/UserResponse"
                   }                  
                 }
               }
@@ -153,7 +153,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Compliment"
+                    "$ref": "#/components/schemas/ComplimentUsersTagResponse"
                   }                  
                 }
               }
@@ -179,7 +179,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Compliment"
+                    "$ref": "#/components/schemas/ComplimentUsersTagResponse"
                   }                  
                 }
               }
@@ -198,7 +198,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Tag"
+                "$ref": "#/components/schemas/TagSend"
               },
               "examples": {
                 "tag": {
@@ -223,7 +223,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/Tag"
+                  "$ref": "#/components/schemas/TagResponse"
                 }
               }
             }
@@ -246,7 +246,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Tag"
+                    "$ref": "#/components/schemas/TagResponse"
                   }                  
                 }
               }
@@ -271,7 +271,7 @@
                 "compliment": {
                   "value": {
                     "tag_id": "Informe o id da tag",
-                    "user_receiver": "Informe o id da usuário que receberá o elogio",
+                    "user_receiver": "Informe o id do usuário que receberá o elogio",
                     "message": "Escreva aqui a mensagem"
                   }
                 }
@@ -300,7 +300,7 @@
   },
   "components": {
     "schemas": {
-      "User": {
+      "UserSend": {
         "type": "object",
         "properties": {
           "name": {
@@ -317,10 +317,56 @@
           }
         }
       },
-      "Tag": {
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "admin": {
+            "type": "boolean"
+          },
+          "password": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
+      },
+      "TagSend": {
         "type": "object",
         "properties": {
           "name": {
+            "type": "string"
+          }
+        }
+      },
+      "TagResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "name_custom": {
             "type": "string"
           }
         }
@@ -359,6 +405,41 @@
           },
           "created_at": {
             "type": "string"
+          }
+        }
+      },
+      "ComplimentUsersTagResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "user_sender": {
+            "type": "string"
+          },
+          "user_receiver": {
+            "type": "string"
+          },
+          "tag_id": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "userSender": {
+            "type": "object",
+            "$ref": "#/components/schemas/UserResponse"
+          },
+          "userReceiver": {
+            "type": "object",
+            "$ref": "#/components/schemas/UserResponse"
+          },
+          "tag": {
+            "type": "object",
+            "$ref": "#/components/schemas/TagResponse"
           }
         }
       }
