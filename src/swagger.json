@@ -1,3 +1,374 @@
 {
-  
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de Valorização entre Colaboradores",
+    "description": "Essa API tem como objetivo permitir que usuários de uma corporação valorizem/elogiem o trabalho dos outros usuários",
+    "termsOfService": "http://localhost:3000/terms",
+    "contact": {
+      "email": "ianasousati@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "API de teste"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "summary": "Cadastro de Usuário",
+        "description": "Rota para cadastrar um novo usuário",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Carolina",
+                    "email": "carolina_nunes@gmail.com",
+                    "admin": true,
+                    "password": "123456"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "User already exists"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Listagem de Usuários",
+        "description": "Rota para listar todos os usuários",
+        "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {          
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }                  
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "Autenticação do Usuário",
+        "description": "Autenticação do Usuário",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "User": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "email": "carolina_nunes@gmail.com",
+                    "password": "123456"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "User already exists"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                      "token": {
+                        "type": "string"
+                      }
+                    }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/compliments/send": {
+      "get": {
+        "description": "Busca todos os elogios feitos pelo usuário",
+        "summary": "Busca todos os elogios feitos pelo usuário",
+        "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {          
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Compliment"
+                  }                  
+                }
+              }
+            }
+          }
+        }
+      }
+    },    
+    "/users/compliments/receive": {
+      "get": {
+        "description": "Busca todos os elogios recebidos do usuário",
+        "summary": "Busca todos os elogios recebidos do usuário",
+        "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {          
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Compliment"
+                  }                  
+                }
+              }
+            }
+          }
+        }
+      }
+    },    
+    "/tags": {
+      "post": {
+        "summary": "Cadastro de Tags",
+        "description": "Rota para cadastrar uma nova tag",
+        "tags": ["Tags"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tag"
+              },
+              "examples": {
+                "tag": {
+                  "value": {
+                    "name": "Comunicativo(a)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Tag already exists"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Tag"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Lista de Tags",
+        "description": "Rota para listar todas as tags",
+        "tags": ["Tags"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {          
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tag"
+                  }                  
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/compliments": {
+      "post": {
+        "summary": "Cadastro de Elogios",
+        "description": "Rota para cadastrar um novo elogio",
+        "tags": ["Compliments"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": { 
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComplimentSend"
+              },
+              "examples": {
+                "compliment": {
+                  "value": {
+                    "tag_id": "Informe o id da tag",
+                    "user_receiver": "Informe o id da usuário que receberá o elogio",
+                    "message": "Escreva aqui a mensagem"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ComplimentResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "admin": {
+            "type": "boolean"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "ComplimentSend": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "user_receiver": {
+            "type": "string"
+          },
+          "tag_id": {
+            "type": "string"
+          }
+        }
+      },
+      "ComplimentResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "user_sender": {
+            "type": "string"
+          },
+          "user_receiver": {
+            "type": "string"
+          },
+          "tag_id": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
 }
