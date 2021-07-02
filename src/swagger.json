@@ -332,9 +332,6 @@
           "admin": {
             "type": "boolean"
           },
-          "password": {
-            "type": "string"
-          },
           "created_at": {
             "type": "string"
           },
